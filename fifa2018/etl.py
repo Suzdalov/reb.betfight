@@ -56,6 +56,31 @@ def load_match():
                                      isOver=False,
                                      title="Группа "+tmA.groupLetter)
     return
+
+def load_match2():
+    evRef = Event.objects.get(code='FIFA2018')
+    # теперь почистим команды
+    Match.objects.filter(event_ref= evRef).delete()
+    with open("fifa2018/static/match.csv", encoding="utf-8") as f_obj:
+        reader = csv.DictReader(f_obj, delimiter=';')
+        for line in reader:
+            dateMatch = datetime.strptime((line["Date"]), '%d.%m.%Y, %H:%M')
+            tmA = Team.objects.get(name=line["TeamA"])
+            tmB = Team.objects.get(name=line["TeamB"])
+            scoreHome = 0
+            scoreGuest = 0
+            scoreHome = line[scoreHome]
+            scoreGuest = line[scoreGuest]
+            m = Match.objects.create(unique_id=uuid.uuid4(),
+                                     dateStart=dateMatch,
+                                     event_ref=evRef,
+                                     teamHome=tmA,
+                                     teamGuest=tmB,
+                                     isOver=True,
+                                     baseHomeScore=scoreHome,
+                                     baseGuestScore=scoreGuest)
+    return
+
 #14.06.2018, 18:00
 
 #    unique_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)

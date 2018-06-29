@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('fifa2018/', include('fifa2018.urls')),
     path('accounts/login/', auth_views.LoginView.as_view()),
-    path('', views.whoareyou,name='home3'),
+    path('', views.whoareyou, name='home3'),
     ]
 
 

@@ -3,7 +3,7 @@ from .models import Event, Player, Bets, Match
 from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .etl import load1, load_team, load_match
+from .etl import load1, load_team, load_match, load_match2
 from .forms import BetForm
 from .main_lib import player_rank, calc_scores, fullrep2
 import uuid
@@ -64,6 +64,9 @@ def setdata1(request):
         elif request.GET['q'] == "LoadMatch":
             load_match()
             message = 'матчи подгружены'
+        elif request.GET['q'] == "LoadMatch2":
+            load_match2()
+            message = 'матчи2 подгружены'
         elif request.GET['q'] == "Calc":
             message = calc_scores()
         else:
