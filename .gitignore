@@ -106,3 +106,4 @@ myvenv
 .idea/
 workspace.xml
 settings.py
+manage.py
