@@ -1,0 +1,132 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+   <style> table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 6px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+}</style>
+    <link rel="stylesheet" href="{% static 'css/bet_edit.css' %}">
+</head>
+<body>
+
+{% block content %}
+<div class="block_l">
+    <h4>{{ bet.match.teamHome.name }} - {{ bet.match.teamGuest.name }}</h4>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Поставить</button>
+    </form>
+</div>
+<div class="block_l">
+    <h4> Кэфы </h4>
+<table>
+    <tr>
+        <td align="center"> 1 </td>
+        <td align="center"> {{ bet.match.koeffHome|default_if_none:"???" }} </td>
+    <tr>
+        <td align="center"> Х </td>
+        <td align="center"> {{ bet.match.koeffDraw|default_if_none:"???" }} </td>
+    </tr>
+    <tr>
+        <td align="center"> 2 </td>
+        <td align="center"> {{ bet.match.koeffGuest|default_if_none:"???" }} </td>
+    </tr>
+</table>
+</div>
+<div style="clear: left"></div>
+<div class="block_l">
+    {% if v_games_home %}
+<h4>матчи {{ bet.match.teamHome.name }}</h4>
+<table>
+    {% for Agames in v_games_home %}
+    <tr>
+        <td>{{ Agames.dateStart|date:"d.m" }}</td>
+        <td align="right">
+        {% if Agames.teamHome == bet.match.teamHome  %}
+            <strong>{{ Agames.teamHome.name }}</strong>
+        {% else %}
+            {{ Agames.teamHome.name }}
+        {% endif %}
+        </td>
+
+        <td align="center">
+        {% if Agames.teamHome == bet.match.teamHome  %}
+            <strong>{{ Agames.totalHomeScore|default_if_none:Agames.baseHomeScore }} </strong>
+            :
+            {{ Agames.totalGuestScore|default_if_none:Agames.baseGuestScore }}
+        {% else %}
+            {{ Agames.totalHomeScore|default_if_none:Agames.baseHomeScore }}
+            :
+            <strong>{{ Agames.totalGuestScore|default_if_none:Agames.baseGuestScore }}</strong>
+        {% endif %}
+        </td>
+        <td align="left">
+        {% if Agames.teamGuest == bet.match.teamHome  %}
+            <strong>{{ Agames.teamGuest.name }}</strong>
+        {% else %}
+            {{ Agames.teamGuest.name }}
+        {% endif %}
+        </td>
+
+    </tr>
+
+
+    {% endfor %}
+</table>
+{% endif %}
+</div>
+<div class="block_l">
+{% if v_games_guest %}
+    <h4>матчи {{ bet.match.teamGuest.name }}</h4>
+<table>
+    {% for Bgames in v_games_guest %}
+    <tr>
+        <td>{{ Bgames.dateStart|date:"d.m" }}</td>
+        <td align="right">
+        {% if Bgames.teamHome == bet.match.teamGuest  %}
+            <strong>{{ Bgames.teamHome.name }}</strong>
+        {% else %}
+            {{ Bgames.teamHome.name }}
+        {% endif %}
+        </td>
+
+        <td align="center">
+        {% if Bgames.teamHome == bet.match.teamGuest  %}
+            <strong>{{ Bgames.totalHomeScore|default_if_none:Bgames.baseHomeScore }} </strong>
+            :
+            {{ Bgames.totalGuestScore|default_if_none:Bgames.baseGuestScore }}
+        {% else %}
+            {{ Bgames.totalHomeScore|default_if_none:Bgames.baseHomeScore }}
+            :
+            <strong>{{ Bgames.totalGuestScore|default_if_none:Bgames.baseGuestScore }}</strong>
+        {% endif %}
+        </td>
+        <td align="left">
+        {% if Bgames.teamGuest == bet.match.teamGuest  %}
+            <strong>{{ Bgames.teamGuest.name }}</strong>
+        {% else %}
+            {{ Bgames.teamGuest.name }}
+        {% endif %}
+        </td>
+
+    </tr>
+    {% endfor %}
+{% endif %}
+</div>
+<div style="clear: left"></div>
+{% endblock %}
+</body>
+</html>

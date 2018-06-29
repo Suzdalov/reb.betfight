@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table>
+  <tr>
+      <td>Время</td>
+      <td>Команда 1</td>
+      <td>Команда 2</td>
+  </tr>
+    <div class="txt-scores">
+ {% for unit2 in res2 %}
+  <tr>
+    <td> {{unit2.0|date:"d M"}} <br>
+        {{unit2.0|time:"H:i"}}
+    </td>
+    <td>    {{unit2.1}} </td>
+    <td>    {{unit2.2}} </td>
+    <td> <a href="{{unit2.3}}">   {{unit2.4}} </a> </td>
+  </tr>
+  {% endfor %}
+        <div>
+</table>
+
+{% endblock %}

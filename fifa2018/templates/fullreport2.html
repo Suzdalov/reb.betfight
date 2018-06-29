@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<h3> score table</h3>
+<br>
+<table>
+  <tr>
+      <td>Место</td>
+      <td>Участник</td>
+      <td>Очки</td>
+      <td>Деньги</td>
+  </tr>
+ {% for unit1 in res1 %}
+  <tr>
+    <td>    {{unit1.0}} </td>
+    <td>    {{unit1.3}} </td>
+    <td>    {{unit1.1}} </td>
+    <td>    {{unit1.2}} </td>
+  </tr>
+  {% endfor %}
+</table>
+
+    <br>
+    <br>
+    <h3>next games</h3> <br>
+<table>
+  <tr>
+      <td>Время</td>
+      <td></td>
+      <td></td>
+  </tr>
+ {% for unit2 in res2 %}
+  <tr>
+    <td> {{unit2.0|date:"d M"}} <br>
+        {{unit2.0|time:"H:i"}}
+    </td>
+    <td>    {{unit2.1}} </td>
+    <td>    {{unit2.2}} </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table>
+  <tr>
+      <td>Место</td>
+      <td>Участник</td>
+      <td>Очки</td>
+      <td>Деньги</td>
+  </tr>
+
+</table>
+<table>
+    <tr>
+             <td align="right">Место</td>
+      <td align="right">Очки</td>
+      <td align="right">Деньги</td>
+      <td align="left">Никнейм</td>
+        {% for gm in v_games %}
+             <td align="center">{{gm.}}
+        {{gm.dateStart|date:"d M"}} <br>
+        {{gm.dateStart|time:"H:i"}}<br>
+          {{gm.teamHome.shortName}}&nbsp;vs.&nbsp;{{gm.teamGuest.shortName}}<br>
+          {{gm.baseHomeScore}}:{{gm.baseGuestScore}}
+      </td>
+
+
+        {% endfor %}
+
+    </tr>
+ {% for unit3 in res3 %}
+  <tr>
+      {% for cols1 in unit3 %}
+    <td>    {{cols1}} </td>
+      {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+
+
+{% endblock %}

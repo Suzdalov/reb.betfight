@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>FIFA2018: The looser's game</title>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/fifa2018.css' %}">
+
+</head>
+<body>
+    <div class="page-header">
+        <h2>Чемпионат прогнозистов ЧМ 2018</h2>
+    </div>
+
+    <div class="btn-group">
+        <a href="{% url 'cockpit' %}"><button>Главная</button></a>
+        <a href="{% url 'betList' %}"><button>Поставить</button></a>
+  <a href="{% url 'fullreport' %}"><button>Полный отчет</button></a>
+</div>
+
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

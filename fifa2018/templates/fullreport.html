@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3> score table v2</h3>
+<br>
+<table>
+  <tr>
+      <td align="right">Место</td>
+      <td align="right">Очки</td>
+      <td align="right">Деньги</td>
+      <td align="left">Никнейм</td>
+      {% for gm in v_games %}
+      <td align="center">{{gm.}}
+      {{gm.dateStart|date:"d M"}} <br>
+        {{gm.dateStart|time:"H:i"}}<br>
+          {{gm.teamHome.shortName}}&nbsp;vs.&nbsp;{{gm.teamGuest.shortName}}<br>
+          {{gm.baseHomeScore}}:{{gm.baseGuestScore}}
+      </td>
+      {% endfor %}
+  </tr>
+{% for player in v_bets %}
+    <tr>
+        {% for bet in player %}
+        <td align="center">
+            {{bet}}
+         </td>
+
+        {% endfor %}
+
+    </tr>
+{% endfor %}
+
+ </table>
+{% endblock %}

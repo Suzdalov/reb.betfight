@@ -1,0 +1,10 @@
+.block_l{
+    float: left;
+    margin: 20px;
+    th, td {
+        padding: 10px;
+    }
+    }
+.block_clear{
+    clear: left;
+    }

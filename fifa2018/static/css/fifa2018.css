@@ -1,0 +1,79 @@
+.btn-group button {
+    background-color: white;
+    border: 1px solid #ddd;
+    color: gray; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+}
+
+.btn-group button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+    background-color: #f2f2f2;
+}
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+/*        text-align: left;*/
+        padding: 16px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+}
+
+.txt-scores{
+/*    font-family: 'Inconsolata', monospace; */
+    text-align: center;
+    height:19px;
+    padding: 0px;
+    vertical-align: middle;
+}
+
+.block_l{
+    display: table-cell;
+    min-width:100px;
+    th, td {
+        padding: 10px;
+    }
+    }
+.block_r{
+    float: right;
+    margin: 20px;
+    th, td {
+        padding: 10px;
+    }
+    }
+.block_clear{
+    clear: both;
+    }
+
+.block_table{
+display:inline-block;
+width:100%;
+}
+.table_strong{
+    height:18px;
+}
+
+.table_head{
+    height:19px;
+    padding: 0px;
+    vertical-align: middle;
+}
