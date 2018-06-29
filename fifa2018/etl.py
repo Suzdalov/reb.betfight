@@ -3,6 +3,10 @@ from .models import Team, Event, Match
 import uuid
 from datetime import datetime
 
+def ifnull(var, val):
+  if var is None:
+    return val
+  return var
 
 def csv_dict_reader(file_obj):
     """
@@ -24,6 +28,11 @@ def load1():
     with open("fifa2018/static/data.csv", encoding="utf-8") as f_obj:
         ret = csv_dict_reader(f_obj)
     return ret
+
+
+def stDate():
+    dt = datetime.strptime('29.06.2018', '%d.%m.%Y')
+    return dt
 
 
 def load_team():
@@ -69,8 +78,8 @@ def load_match2():
             tmB = Team.objects.get(name=line["TeamB"])
             scoreHome = 0
             scoreGuest = 0
-            scoreHome = line[scoreHome]
-            scoreGuest = line[scoreGuest]
+            scoreHome = ifnull(line["scoreHome"], 0)
+            scoreGuest = ifnull(line["scoreGuest"], 0)
             m = Match.objects.create(unique_id=uuid.uuid4(),
                                      dateStart=dateMatch,
                                      event_ref=evRef,

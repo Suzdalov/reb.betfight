@@ -2,6 +2,9 @@ from .models import Bets, Player, Match
 import uuid
 import datetime
 
+
+
+
 def ifnull(var, val):
   if var is None:
     return val

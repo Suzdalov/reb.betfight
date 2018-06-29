@@ -3,7 +3,7 @@ from .models import Event, Player, Bets, Match
 from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .etl import load1, load_team, load_match, load_match2
+from .etl import load1, load_team, load_match, load_match2, stDate
 from .forms import BetForm
 from .main_lib import player_rank, calc_scores, fullrep2
 import uuid
@@ -184,9 +184,11 @@ def bet(request, betid):
 def fullreport(request):
     # соберем всю жару
     # сначала наших чемпионов
+    dateFrom = stDate()
     v_gamers = player_rank()
     games_arr = []
     v_games = Match.objects.order_by('dateStart')
+    v_games = v_games.filter(dateStart__gte=dateFrom)
     # сохраним в массив
     n = 0
     for v_gamer in v_gamers:

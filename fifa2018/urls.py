@@ -11,6 +11,6 @@ urlpatterns = [
     path('bet/', views.betlist, name='betList'),
     path('bet/<uuid:betid>', views.bet, name='bet'),
     path('fullreport/', views.fullreport, name='fullreport'),
-#    path('register/', views.RegisterFormView.as_view()),
+    path('register/', views.RegisterFormView.as_view()),
 ]
 
