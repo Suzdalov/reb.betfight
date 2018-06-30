@@ -1,7 +1,7 @@
 from .models import Bets, Player, Match
 import uuid
 import datetime
-
+from .etl import stDate
 
 
 
@@ -41,7 +41,8 @@ def player_rank():
     return res1
 
 def calc_scores():
-    v_games = Match.objects.filter(isOver=True)
+    dateFrom = stDate()
+    v_games = Match.objects.filter(isOver=True, dateStart__gte=dateFrom)
     v_ret = "Пересчет:"
     for v_game in v_games:
         if v_game.baseHomeScore is None or v_game.baseGuestScore is None:
