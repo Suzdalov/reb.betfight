@@ -50,7 +50,7 @@ class Match(models.Model):
     isOver = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.teamHome.shortName + ' vs ' + self.teamGuest.shortName
+        return self.teamHome.name + ' vs ' + self.teamGuest.name
 
 
 class Player(models.Model):

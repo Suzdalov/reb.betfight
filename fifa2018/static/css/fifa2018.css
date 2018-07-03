@@ -30,12 +30,29 @@
     }
 
     th, td {
-/*        text-align: left;*/
+        text-align: center;
         padding: 16px;
     }
 
     tr:nth-child(even) {
         background-color: #f2f2f2
+}
+
+.blockHomeWin{
+background: linear-gradient(to right, #FFEBCD 15%, #FFFFFF, #FFFFFF);
+background-clip: border-box;
+-webkit-border-vertical-spacing: 1px;
+border: 1px solid #ddd;
+}
+
+.blockGuestWin{
+background: linear-gradient(to left, #E6E6FA 15%, #FFFFFF, #FFFFFF);
+border: 1px solid #ddd;
+}
+
+.blockNoneWin{
+background: linear-gradient(to top, #C0C0C0 15%, #FFFFFF, #FFFFFF);
+border: 1px solid #ddd;
 }
 
 .txt-scores{

@@ -10,12 +10,24 @@
       <td align="right">Деньги</td>
       <td align="left">Никнейм</td>
       {% for gm in v_games %}
-      <td align="center">{{gm.}}
+                {% if gm.baseHomeScore is None or gm.baseGuestScore is None %}
+                <td>
+          {% elif gm.baseHomeScore > gm.baseGuestScore %}
+                <td class="blockHomeWin">
+          {% elif gm.baseHomeScore < gm.baseGuestScore %}
+                <td class="blockGuestWin">
+          {% else %}
+                <td class="blockNoneWin">
+          {% endif %}
+  {#    <td align="center">{{gm.}}   #}
       {{gm.dateStart|date:"d M"}} <br>
         {{gm.dateStart|time:"H:i"}}<br>
           {{gm.teamHome.shortName}}&nbsp;vs.&nbsp;{{gm.teamGuest.shortName}}<br>
           {{gm.baseHomeScore}}:{{gm.baseGuestScore}}
+
+
       </td>
+
       {% endfor %}
   </tr>
 {% for player in v_bets %}
