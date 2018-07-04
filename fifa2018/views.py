@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .etl import load1, load_team, load_match, load_match2, stDate
 from .forms import BetForm
-from .main_lib import player_rank, calc_scores, fullrep2
+from .main_lib import player_rank, calc_scores, fullrep2, getWinner
 import uuid
 import datetime
 from datetime import timedelta
@@ -203,13 +203,19 @@ def fullreport(request):
                                                           defaults={'unique_id': uuid.uuid4, 'betHomeScore': 0,
                                                                     'betGuestScore': 0, 'points': 0, 'money': 0,
                                                                     'isEdited': False})
+            v_txt = ''
+            v_dsgn = ''
             if v_game.isOver:
-                games_arr[n].append(str(v_cur_bet.betHomeScore)+":"+str(v_cur_bet.betGuestScore))
+                v_txt = (str(v_cur_bet.betHomeScore)+":"+str(v_cur_bet.betGuestScore))
+                v_dsgn = getWinner(v_cur_bet.betHomeScore, v_cur_bet.betGuestScore)
             else:
                 if v_cur_bet.isEdited is True:
-                    games_arr[n].append("***")
+                    v_txt = "***"
                 else:
-                    games_arr[n].append("...")
+                    v_txt = "..."
+                v_dsgn = "Hmm"
+            games_arr[n].append([v_txt, v_dsgn])
+
         n = n + 1
     return render(request, 'fullreport.html', {'v_games': v_games, 'v_bets': games_arr})
 

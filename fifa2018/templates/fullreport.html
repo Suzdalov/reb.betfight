@@ -20,9 +20,8 @@
                 <td class="blockNoneWin">
           {% endif %}
   {#    <td align="center">{{gm.}}   #}
-      {{gm.dateStart|date:"d M"}} <br>
-        {{gm.dateStart|time:"H:i"}}<br>
-          {{gm.teamHome.shortName}}&nbsp;vs.&nbsp;{{gm.teamGuest.shortName}}<br>
+      {{gm.dateStart|date:"d M"}} {{gm.dateStart|time:"H:i"}}<br><br>
+      <b><font color="#ff8000">{{gm.teamHome.shortName}}</font>&nbsp;vs.&nbsp;<font color="#0000ff">{{gm.teamGuest.shortName}}</font></b><br>
           {{gm.baseHomeScore}}:{{gm.baseGuestScore}}
 
 
@@ -32,11 +31,27 @@
   </tr>
 {% for player in v_bets %}
     <tr>
-        {% for bet in player %}
+        {% for bet in player|slice:":4" %}
         <td align="center">
             {{bet}}
          </td>
-
+        {% endfor %}
+        {# а теперь двигательный блок #}
+                {% for bet, dsgn in player|slice:"4:" %}
+        {% if dsgn == "Hmm" %}
+            <td>
+        {% elif dsgn == "Home"  %}
+            <td class="blockHomeWin">
+        {% elif dsgn == "Guest"  %}
+            <td class="blockGuestWin">
+        {% elif dsgn == "Draw"  %}
+            <td class="blockNoneWin">
+        {% else %}
+            <td>
+        {% endif %}
+            {{bet}}<br>
+            {{dsgn}}<br>
+         </td>
         {% endfor %}
 
     </tr>

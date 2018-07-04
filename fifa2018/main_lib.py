@@ -117,3 +117,12 @@ def fullrep2(dateFrom, dateTo):
                     games_arr[n].append("...")
         n = n + 1
     return games_arr
+
+
+def getWinner(score1, score2):
+    if score1 > score2:
+        return "Home"
+    elif score1 < score2:
+        return "Guest"
+    else:
+        return "Draw"
